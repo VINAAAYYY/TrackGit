@@ -28,6 +28,8 @@ func (r Repository) Insert(value interface{}) {
 	r.Db.Create(value)
 }
 
-func (r Repository) Update(column string, value interface{}) {
-	r.Db.Update(column, value)
+func (r Repository) Delete(hash string) {
+	var commitHistory model.CommitHistory
+	cond := model.CommitHistory{CommitHash: hash}
+	r.Db.Where(cond).Delete(commitHistory)
 }

@@ -8,6 +8,6 @@ import (
 
 type CommitHistory struct {
 	gorm.Model
-	Date       time.Time `gorm:"index:date;not null"`
-	CommitHash string    `gorm:"unique;not null"`
+	Date       time.Time `gorm:"index:idx_date;not null"`
+	CommitHash string    `gorm:"uniqueIndex:idx_hash;not null"`
 }
