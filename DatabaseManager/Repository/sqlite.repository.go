@@ -1,0 +1,33 @@
+package repository
+
+import (
+	model "GitHistoryTracker/DatabaseManager/Models"
+	"time"
+
+	"gorm.io/gorm"
+)
+
+type Repository struct {
+	Db *gorm.DB
+}
+
+func (r Repository) GetAll() model.CommitHistory {
+	var result model.CommitHistory
+	r.Db.Find(&result)
+	return result
+}
+
+func (r Repository) GetBetweenDates(startDate time.Time, endDate time.Time) model.CommitHistory {
+	var result model.CommitHistory
+	r.Db.Where("Date BETWEEN ? AND ?", startDate, endDate).Find(&result)
+	return result
+}
+
+// Can be used for bulk insert too
+func (r Repository) Insert(value interface{}) {
+	r.Db.Create(value)
+}
+
+func (r Repository) Update(column string, value interface{}) {
+	r.Db.Update(column, value)
+}

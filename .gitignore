@@ -1,0 +1,15 @@
+# sqlite database
+**.db
+**.json
+.DS_Store
+GitHistoryTracker
+
+# env file
+.env
+
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
