@@ -14,7 +14,7 @@ type RetroCommitTracker struct{}
 
 func (rct RetroCommitTracker) Track(*gorm.DB) []model.CommitHistory {
 	var search Search
-	x := []model.CommitHistory{}
+	history := []model.CommitHistory{}
 	gitDirectories := search.TrackGirDirs()
 	for _, dir := range gitDirectories {
 		color.New(color.FgBlue).Println("Checking Commits in", dir)
@@ -39,7 +39,7 @@ func (rct RetroCommitTracker) Track(*gorm.DB) []model.CommitHistory {
 		err = commitIter.ForEach(func(c *object.Commit) error {
 			// replace with user email
 			if c.Committer.Email == "vinay.singhal43@gmail.com" {
-				x = append(x, model.CommitHistory{
+				history = append(history, model.CommitHistory{
 					Date:       c.Author.When,
 					CommitHash: c.Hash.String(),
 				})
@@ -52,5 +52,5 @@ func (rct RetroCommitTracker) Track(*gorm.DB) []model.CommitHistory {
 		}
 
 	}
-	return x
+	return history
 }
