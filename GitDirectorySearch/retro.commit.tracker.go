@@ -59,7 +59,6 @@ func (rct RetroCommitTracker) Track(*gorm.DB) []model.CommitHistory {
 		repoUserEmail := rct.getGitRepoConfigEmail(repo)
 
 		err = commitIter.ForEach(func(c *object.Commit) error {
-			// replace with user email
 			if c.Committer.Email == repoUserEmail || slices.Contains(emailsToTrack, c.Committer.Email) {
 				history = append(history, model.CommitHistory{
 					Date:       c.Author.When,
