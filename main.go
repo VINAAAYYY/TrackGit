@@ -1,9 +1,9 @@
 package main
 
 import (
-	DbManager "GitHistoryTracker/DatabaseManager"
-	Repository "GitHistoryTracker/DatabaseManager/Repository"
-	TrackGirDirs "GitHistoryTracker/GitDirectorySearch"
+	DbManager "TrackGit/DatabaseManager"
+	Repository "TrackGit/DatabaseManager/Repository"
+	TrackGirDirs "TrackGit/GitDirectorySearch"
 	"fmt"
 
 	"github.com/fatih/color"

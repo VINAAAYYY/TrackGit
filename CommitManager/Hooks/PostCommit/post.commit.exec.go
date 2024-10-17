@@ -4,8 +4,8 @@ import (
 	"log"
 	"os"
 
-	Model "GitHistoryTracker/DatabaseManager/Models"
-	Repository "GitHistoryTracker/DatabaseManager/Repository"
+	Model "TrackGit/DatabaseManager/Models"
+	Repository "TrackGit/DatabaseManager/Repository"
 
 	"github.com/fatih/color"
 	git "github.com/go-git/go-git/v5"

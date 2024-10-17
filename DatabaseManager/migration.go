@@ -1,7 +1,7 @@
 package databasemanager
 
 import (
-	models "GitHistoryTracker/DatabaseManager/Models"
+	models "TrackGit/DatabaseManager/Models"
 
 	"github.com/fatih/color"
 	"gorm.io/gorm"

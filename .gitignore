@@ -2,7 +2,7 @@
 **.db
 **.json
 .DS_Store
-GitHistoryTracker
+TrackGit
 
 # env file
 .env

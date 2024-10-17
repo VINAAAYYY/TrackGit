@@ -1,7 +1,7 @@
 package repository
 
 import (
-	model "GitHistoryTracker/DatabaseManager/Models"
+	model "TrackGit/DatabaseManager/Models"
 	"time"
 
 	"gorm.io/gorm"

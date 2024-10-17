@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	Repository "GitHistoryTracker/DatabaseManager/Repository"
+	Repository "TrackGit/DatabaseManager/Repository"
 
 	"github.com/fatih/color"
 	"gorm.io/driver/sqlite"
