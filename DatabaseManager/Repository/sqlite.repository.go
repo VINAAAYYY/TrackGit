@@ -23,8 +23,11 @@ func (r Repository) GetBetweenDates(startDate time.Time, endDate time.Time) mode
 	return result
 }
 
-// Can be used for bulk insert too
-func (r Repository) Insert(value interface{}) {
+func (r Repository) Insert(value *model.CommitHistory) {
+	r.Db.Create(value)
+}
+
+func (r Repository) InsertBulk(value []*model.CommitHistory) {
 	r.Db.Create(value)
 }
 
