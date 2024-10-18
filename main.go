@@ -4,7 +4,6 @@ import (
 	DbManager "TrackGit/DatabaseManager"
 	Repository "TrackGit/DatabaseManager/Repository"
 	TrackGirDirs "TrackGit/GitDirectorySearch"
-	"fmt"
 
 	"github.com/fatih/color"
 )
@@ -21,7 +20,5 @@ func main() {
 	repository.Db = db
 	repository.Insert(commitHistory)
 
-	// get commit history (test only)
-	dbCommitHistory := repository.GetAll()
-	fmt.Println(dbCommitHistory)
+	color.New(color.Italic, color.FgGreen).Println("Initialization Completed 🥳")
 }

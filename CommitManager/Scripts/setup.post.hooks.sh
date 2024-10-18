@@ -2,14 +2,16 @@
 
 GLOBAL_HOOKS_DIR="$HOME/.global-git-hooks"
 
+echo "***** Setting up global git hooks *****"
+
 # Create the global hooks directory if not exists
 if [ ! -d "$GLOBAL_HOOKS_DIR" ]; then
     mkdir -p "$GLOBAL_HOOKS_DIR"
 fi
 
-cp ./post.commit.sh "$GLOBAL_HOOKS_DIR/post-commit"
-cp ./post.rewrite.sh "$GLOBAL_HOOKS_DIR/post-rewrite"
-cp ./post.checkout.sh "$GLOBAL_HOOKS_DIR/post-checkout"
+cp "$TRACKGIT_PATH/CommitManager/Scripts/post.commit.sh" "$GLOBAL_HOOKS_DIR/post-commit"
+cp "$TRACKGIT_PATH/CommitManager/Scripts/post.rewrite.sh" "$GLOBAL_HOOKS_DIR/post-rewrite"
+cp "$TRACKGIT_PATH/CommitManager/Scripts/post.checkout.sh" "$GLOBAL_HOOKS_DIR/post-checkout"
 
 # Ensuring the hooks are executable
 chmod +x "$GLOBAL_HOOKS_DIR/post-commit"
