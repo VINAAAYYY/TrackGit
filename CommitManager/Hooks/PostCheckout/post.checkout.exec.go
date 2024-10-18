@@ -1,4 +1,4 @@
-package postcheckout
+package main
 
 import (
 	"log"

@@ -1,4 +1,4 @@
-package postcommit
+package main
 
 import (
 	"log"
@@ -15,7 +15,6 @@ import (
 )
 
 func main() {
-	// get commit hash from OS
 	if len(os.Args) < 2 {
 		log.Fatal("No commit hash provided")
 	}
