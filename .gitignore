@@ -3,6 +3,8 @@
 **.json
 .DS_Store
 TrackGit
+post.commit.exec
+post.checkout.exec
 
 # env file
 .env
