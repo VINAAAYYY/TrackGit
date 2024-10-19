@@ -18,7 +18,7 @@ func main() {
 
 	var repository Repository.Repository
 	repository.Db = db
-	repository.Insert(commitHistory)
+	repository.InsertBulk(commitHistory)
 
 	color.New(color.Italic, color.FgGreen).Println("Initialization Completed 🥳")
 }

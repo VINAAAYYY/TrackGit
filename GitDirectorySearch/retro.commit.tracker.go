@@ -23,9 +23,9 @@ type Config struct {
 	OTHER_USER_PROFILES []string `env:"OTHER_USER_PROFILES"`
 }
 
-func (rct RetroCommitTracker) Track(*gorm.DB) []model.CommitHistory {
+func (rct RetroCommitTracker) Track(*gorm.DB) []*model.CommitHistory {
 	var search Search
-	history := []model.CommitHistory{}
+	history := []*model.CommitHistory{}
 	gitDirectories := search.TrackGirDirs()
 	ctx := context.Background()
 
@@ -60,7 +60,7 @@ func (rct RetroCommitTracker) Track(*gorm.DB) []model.CommitHistory {
 
 		err = commitIter.ForEach(func(c *object.Commit) error {
 			if c.Committer.Email == repoUserEmail || slices.Contains(emailsToTrack, c.Committer.Email) {
-				history = append(history, model.CommitHistory{
+				history = append(history, &model.CommitHistory{
 					Date:       c.Author.When,
 					CommitHash: c.Hash.String(),
 				})

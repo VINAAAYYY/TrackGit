@@ -15,14 +15,15 @@ import (
 )
 
 func main() {
-	if len(os.Args) < 2 {
+	if len(os.Args) < 3 {
 		log.Fatal("No commit hash provided")
 	}
 
 	commitHash := os.Args[1]
+	repoPath := os.Args[2]
 
 	// get commit info
-	repo, err := git.PlainOpen(".")
+	repo, err := git.PlainOpen(repoPath)
 	if err != nil {
 		color.New(color.Bold, color.FgRed).Println("Could not open repository:", err.Error())
 		return
@@ -35,14 +36,14 @@ func main() {
 	}
 
 	// connect to database
-	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open("../../../commit.history.db"), &gorm.Config{})
 	if err != nil {
 		color.New(color.Bold, color.FgRed).Println("Error while connecting to DB:", err.Error())
 		return
 	}
 
 	// save commit
-	commitObj := Model.CommitHistory{
+	commitObj := &Model.CommitHistory{
 		Date:       commit.Author.When,
 		CommitHash: commitHash,
 	}

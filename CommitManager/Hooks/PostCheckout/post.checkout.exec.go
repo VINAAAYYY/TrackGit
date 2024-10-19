@@ -19,7 +19,7 @@ func main() {
 	commitHashes := os.Args[1:]
 
 	// connect to database
-	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open("../../../commit.history.db"), &gorm.Config{})
 	if err != nil {
 		color.New(color.Bold, color.FgRed).Println("Error while connecting to DB:", err.Error())
 		return
