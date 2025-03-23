@@ -10,6 +10,7 @@ import (
 type Search struct{}
 
 func (gd Search) recursiveSearch(name string, gitInitiatedDirs *[]string) {
+	
 	if strings.HasSuffix(name, ".git/") {
 		*gitInitiatedDirs = append(*gitInitiatedDirs, name)
 	}

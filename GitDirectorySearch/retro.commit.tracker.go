@@ -24,6 +24,7 @@ type Config struct {
 }
 
 func (rct RetroCommitTracker) Track(*gorm.DB) []*model.CommitHistory {
+	color.New(color.Underline, color.FgGreen).Println("Commit Tracking Started")
 	var search Search
 	history := []*model.CommitHistory{}
 	gitDirectories := search.TrackGirDirs()
@@ -73,6 +74,7 @@ func (rct RetroCommitTracker) Track(*gorm.DB) []*model.CommitHistory {
 		}
 
 	}
+	color.New(color.Underline, color.FgGreen).Println("Commit Tracking Completed")
 	return history
 }
 

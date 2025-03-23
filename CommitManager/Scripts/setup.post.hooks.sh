@@ -10,8 +10,7 @@ if [ ! -d "$GLOBAL_HOOKS_DIR" ]; then
 fi
 
 cp "$TRACKGIT_PATH/CommitManager/Scripts/post.commit.sh" "$GLOBAL_HOOKS_DIR/post-commit"
-cp "$TRACKGIT_PATH/CommitManager/Scripts/post.rewrite.sh" "$GLOBAL_HOOKS_DIR/post-rewrite"
-cp "$TRACKGIT_PATH/CommitManager/Scripts/post.checkout.sh" "$GLOBAL_HOOKS_DIR/post-checkout"
+# cp "$TRACKGIT_PATH/CommitManager/Scripts/post.checkout.sh" "$GLOBAL_HOOKS_DIR/post-checkout"
 # cp "$TRACKGIT_PATH/CommitManager/Scripts/post.reset.sh" "$GLOBAL_HOOKS_DIR/post-reset"
 
 chmod +x "$GLOBAL_HOOKS_DIR/post-commit"
