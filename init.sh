@@ -21,7 +21,7 @@ fi
 # Add alias 'trackgit' to ~/.bashrc if it doesn't exist.
 chmod +x ./ContributionVisualizer/Scripts/trackgit.command.sh
 if ! grep -q "alias trackgit=" ~/.bashrc; then
-    echo "alias trackgit='./ContributionVisualizer/Scripts/trackgit.command.sh'" >> ~/.bashrc
+    echo "alias trackgit='$TRACKGIT_PATH/ContributionVisualizer/Scripts/trackgit.command.sh'" >> ~/.bashrc
     echo "Alias trackgit added to bashrc"
 else
     echo "Alias trackgit already exists in bashrc"
