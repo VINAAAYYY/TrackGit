@@ -4,6 +4,7 @@ TrackGit is a Git commit visualizer that displays your contributions in a calend
 
 ## Go Version
 1.23.1
+[macOS](https://go.dev/dl/go1.23.1.darwin-amd64.pkg) [windows](go1.23.1.windows-arm64.msi) [linux](go1.23.1.linux-arm64.tar.gz)
 
 ## Features
 - **Calendar Heatmap**: Visualize commit activity by day over a week, month, or year.
