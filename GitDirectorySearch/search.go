@@ -2,38 +2,34 @@ package gitdirectorysearch
 
 import (
 	"os"
-	"strings"
+	"path/filepath"
 
 	color "github.com/fatih/color"
 )
 
 type Search struct{}
 
-func (gd Search) recursiveSearch(name string, gitInitiatedDirs *[]string) {
-	
-	if strings.HasSuffix(name, ".git/") {
-		*gitInitiatedDirs = append(*gitInitiatedDirs, name)
-	}
-	files, err := os.ReadDir(name)
-	if err != nil {
-		return
-	}
-
-	for _, file := range files {
-		if file.IsDir() {
-			nextPath := name + file.Name() + "/"
-			gd.recursiveSearch(nextPath, gitInitiatedDirs)
-		}
-	}
-}
-
-func (gd Search) TrackGirDirs() []string {
+func (gd Search) TrackGitDirs() []string {
 	userHomeDir, err := os.UserHomeDir()
 	if err != nil {
-		color.New(color.Bold, color.FgRed).Println("No Home Directory Found")
+		color.New(color.Bold, color.FgRed).Println("No Home Directory Found ")
+		return nil
 	}
 
-	gitInitiatedDirs := []string{}
-	gd.recursiveSearch(userHomeDir+"/", &gitInitiatedDirs)
-	return gitInitiatedDirs
+	var gitDirs []string
+
+	err = filepath.WalkDir(userHomeDir, func(path string, d os.DirEntry, err error) error {
+		if err != nil { // skip unwalkable directory
+			return nil
+		}
+
+		if d.IsDir() && d.Name() == ".git" {
+			gitDirs = append(gitDirs, path)
+		}
+		return nil
+	})
+	if err != nil {
+		color.New(color.Bold, color.FgRed).Println("Error occured while searching commits:", err)
+	}
+	return gitDirs
 }

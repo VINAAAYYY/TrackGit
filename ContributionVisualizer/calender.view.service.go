@@ -36,7 +36,6 @@ func (c ContributionVisualizer) BuildCalender(startDate time.Time) ContributionV
 	return c
 }
 
-
 func buildMonthHeader(table *tview.Table, startDate time.Time, weeks int) {
 	var prevMonth time.Month
 	for col := 1; col <= weeks; col++ {
@@ -68,26 +67,30 @@ func buildDayHeader(table *tview.Table) {
 func fillCalendarCells(table *tview.Table, startDate time.Time, weeks int, commitDateMap map[time.Time]int) {
 	// Calculate how many cells to skip in the first week.
 	firstWeekday := int(startDate.Weekday()) // 0=Sunday, 6=Saturday
+	// Normalize the start date to midnight.
 	date := time.Date(startDate.Year(), startDate.Month(), startDate.Day(), 0, 0, 0, 0, startDate.Location())
 
-	for col := 1; col <= weeks; col++ {
-		for row := 0; row < 7; row++ {
-			// For the first week, leave cells blank for days before startDate.
-			if col == 1 && row < firstWeekday {
-				table.SetCell(row+2, col,
-					tview.NewTableCell("").
-						SetSelectable(false))
-				continue
-			}
-			commitCount := commitDateMap[date]
-			cellColor := colorForCommitCount(commitCount)
-			cell := tview.NewTableCell(fmt.Sprintf("%d", commitCount)).
-				SetBackgroundColor(cellColor).
-				SetAlign(tview.AlignLeft).
-				SetReference(date)
-			table.SetCell(row+2, col, cell)
-			date = date.AddDate(0, 0, 1) // next date
+	totalCells := weeks * 7
+	for i := 0; i < totalCells; i++ {
+		col := (i / 7) + 1 // Calculate column index (starting at 1)
+		row := i % 7       // Calculate row index (0-6)
+
+		// For the first week, leave cells blank for days before startDate.
+		if col == 1 && row < firstWeekday {
+			table.SetCell(row+2, col,
+				tview.NewTableCell("").
+					SetSelectable(false))
+			continue
 		}
+
+		commitCount := commitDateMap[date]
+		cellColor := colorForCommitCount(commitCount)
+		cell := tview.NewTableCell(fmt.Sprintf("%d", commitCount)).
+			SetBackgroundColor(cellColor).
+			SetAlign(tview.AlignLeft).
+			SetReference(date)
+		table.SetCell(row+2, col, cell)
+		date = date.AddDate(0, 0, 1) // next date
 	}
 }
 

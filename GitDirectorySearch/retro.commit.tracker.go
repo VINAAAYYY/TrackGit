@@ -27,7 +27,7 @@ func (rct RetroCommitTracker) Track(*gorm.DB) []*model.CommitHistory {
 	color.New(color.Underline, color.FgGreen).Println("Commit Tracking Started")
 	var search Search
 	history := []*model.CommitHistory{}
-	gitDirectories := search.TrackGirDirs()
+	gitDirectories := search.TrackGitDirs()
 	ctx := context.Background()
 
 	var c Config
@@ -58,9 +58,9 @@ func (rct RetroCommitTracker) Track(*gorm.DB) []*model.CommitHistory {
 		}
 
 		repoUserEmail := rct.getGitRepoConfigEmail(repo)
-
+		emailsToTrack = append(emailsToTrack, repoUserEmail)
 		err = commitIter.ForEach(func(c *object.Commit) error {
-			if c.Committer.Email == repoUserEmail || slices.Contains(emailsToTrack, c.Committer.Email) {
+			if slices.Contains(emailsToTrack, c.Committer.Email) {
 				history = append(history, &model.CommitHistory{
 					Date:       c.Author.When,
 					CommitHash: c.Hash.String(),
